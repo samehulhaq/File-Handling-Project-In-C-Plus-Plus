@@ -1,0 +1,177 @@
+
+#include<iomanip>
+#include <fstream>
+#include <iostream>
+#include <conio.h>
+#include <string>
+#include <stdlib.h>     /* exit, EXIT_FAILURE */
+using namespace std;
+
+void header(){
+	cout<<left;
+     cout<<"\n"<<setw(20)<<"Number"<<setw(20)<<"Name"<<endl;
+}
+
+void insertrecords()
+{
+
+	 struct records
+   {
+   string id;
+   string name;
+   };
+   //char data[100];
+	//cin.getline(data, 100);
+   // open a file in write mode.
+   records r;
+   ofstream outfile;
+   outfile.open("afile.txt",ios::app);
+   // write inputted data into the file.
+   char ch='y';
+   while(ch=='y' && 'Y')
+   {
+ outfile<<endl;
+    cout<<"Enetr Number : ";
+    cin>>r.id;
+ 
+    cout<<"Enter Name : ";
+
+	cin>>r.name;
+
+    outfile <<r.id<<setw(10);
+    outfile<<r.name;
+    cout<<"Do you want Another Records, (y) For Retry (N) for Exit)";
+    cin>>ch;
+
+   // close the opened file.
+   }
+   outfile.close();
+}
+void readrecords(){
+
+	ifstream infile; 
+   infile.open("afile.txt"); 
+ 
+   
+string r;
+
+   while(!infile.eof())
+   {
+	   for(int i=0;i<=1;i++)
+	   {
+		   infile >> r; 
+	       cout <<setw(20);
+	       cout << r ;
+	   }
+	   cout<<endl;
+    
+	}
+
+   
+ 
+   // close the opened file.
+   infile.close();
+
+}
+void count()
+{
+	 ifstream fin;
+     fin.open("afile.txt");
+     char str[80]; int count=0;
+     while(!fin.eof())
+     {
+          fin.getline(str,80);
+          count++;
+     }
+	 count--;
+     cout<<"Number of lines in file is "<<count<<endl;
+     fin.close();
+}
+void deleterecords ()
+{
+	ifstream ifs;
+
+      ifs.open("afile.txt", ios::binary);
+      string line= "asif";;
+
+      string readIn;
+
+      while (!ifs.eof())
+
+       {
+
+             std::getline(ifs,line);
+
+             readIn+=line;
+
+       }
+
+     readIn.erase(readIn.end()-1);
+}
+void search()
+{
+ifstream infile; 
+infile.open("afile.txt"); 
+string word; // will hold a single word from the file 
+bool found = false; //determines if a word was found 
+string word1;
+cin>>word1;
+while( infile >> word ) 
+{ 
+if( word == word1){ 
+cout <<"The word has been found." << endl; 
+found = true; 
+
+} 
+} 
+if( found==false) 
+cout <<"The word wasn't found." << endl; 
+}
+int main ()
+{
+lbl:
+
+cout<<"\n\n"<<setw(30)<<"****************Enter your Choice**********************"<<endl;
+cout<<"1 for Insert "<<endl;
+cout<<"2 for Show "<<endl;
+cout<<"3 for Again "<<endl;
+cout<<"4 for exit "<<endl;
+cout<<"6 for Count  Records "<<endl;
+cout<<"7 for Search "<<endl;
+cout<<"Enter Choice  :  ";
+	int a;
+	cin>>a;
+	switch(a){
+case 1:
+		insertrecords();
+		goto lbl;
+		break;
+		case 2:
+			header();
+	readrecords();
+	goto lbl;
+		break;
+			
+		case 3:
+		system("CLS");
+	goto lbl;
+		break;
+		case 4:
+		exit (EXIT_FAILURE);
+		break;
+		case 6:
+		count ();
+			goto lbl;
+		break;
+		case 7:
+		search ();
+			goto lbl;
+		break;
+	default:
+		cout<<"Invalid";
+			goto lbl;
+		break;
+	}
+	 getch();
+   return 0;
+}
